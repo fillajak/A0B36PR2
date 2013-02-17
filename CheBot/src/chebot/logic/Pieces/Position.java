@@ -2,7 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package chebot.logic;
+package chebot.logic.Pieces;
+
+import chebot.logic.*;
 
 /**
  *
@@ -59,4 +61,17 @@ public class Position {
     public String toString() {
         return "[" + (char) (row - 1 + 'A')  + line + "]";
     }
+    @Override
+    public Position clone(){
+        return new Position(this.row, this.line);
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getLine() {
+        return line;
+    }
+    
 }

@@ -15,6 +15,9 @@ public class LogicException extends RuntimeException {
 
     /**
      * Exception for package logic. 
+     * codes:
+     * 1 - out of field
+     * 2 - placing one piece on another
      * @param message - what happend
      * @param code - unique code for each situation
      */

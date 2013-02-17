@@ -4,7 +4,11 @@
  */
 package chebot;
 
-import chebot.logic.Position;
+import chebot.logic.Board;
+import chebot.logic.Pieces.Pawn;
+import chebot.logic.Pieces.Piece;
+import chebot.logic.Pieces.Position;
+import chebot.logic.Pieces.Side;
 
 /**
  *
@@ -16,10 +20,12 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("test2");
-        Position p = new Position(Position.A, 8);
-        System.out.println(p);
-        p.changePosition(Position.B, 3);
-        System.out.println(p);
+        Board b = new Board();
+        Piece p = new Pawn(new Position(Position.A, 1), Side.WHITE);
+        b.placePiece(p);
+        b.placePiece(p);
+        System.out.println(b);
+        
+       
     }
 }
