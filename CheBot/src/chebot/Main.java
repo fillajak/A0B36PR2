@@ -4,6 +4,8 @@
  */
 package chebot;
 
+import chebot.logic.Position;
+
 /**
  *
  * @author Dick
@@ -15,8 +17,9 @@ public class Main {
      */
     public static void main(String[] args) {
         System.out.println("test");
-        System.out.println("jedna, dva");
-        System.out.println("dva pet");
-        System.out.println("");
+        Position p = new Position(Position.A, 8);
+        System.out.println(p);
+        p.changePosition(Position.B, 3);
+        System.out.println(p);
     }
 }
