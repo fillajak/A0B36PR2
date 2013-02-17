@@ -15,5 +15,8 @@ public class Main {
      */
     public static void main(String[] args) {
         System.out.println("test");
+        System.out.println("jedna, dva");
+        System.out.println("dva pet");
+        System.out.println("");
     }
 }
