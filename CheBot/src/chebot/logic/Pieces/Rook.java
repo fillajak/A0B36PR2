@@ -6,7 +6,7 @@ package chebot.logic.Pieces;
 
 import chebot.logic.Board;
 /**
- *
+ *Represesnts Rook.
  * @author Dick
  */
 public class Rook extends Piece{
