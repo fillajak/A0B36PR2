@@ -5,12 +5,14 @@
 package chebot.logic;
 
 /**
- *
+ *Exception for logic.
  * @author Dick
  */
 public class LogicException extends RuntimeException {
     
     public static final int OUT_OF_FIELD_CODE = 1;
+    public static final int NO_PIECE_FOUND = 2;
+    
     private int code;
 
     /**

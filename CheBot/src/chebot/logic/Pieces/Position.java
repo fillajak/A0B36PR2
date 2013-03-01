@@ -73,5 +73,43 @@ public class Position {
     public int getLine() {
         return line;
     }
+    /**
+     * Evalutates next move from vect like that:
+     *  actual position (a,b), vect(c,d)
+     *  return postion = (a+c, c+d);
+     *  
+     * @param vect  - next move evaluated from vect
+     * @return - evaluated position
+     * @throws - LogicException - out of field
+     */
+    public Position getNextMove(DigVec vect){
+        return new Position(row+vect.getRow(), line+ vect.getLine());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.row;
+        hash = 29 * hash + this.line;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Position other = (Position) obj;
+        if (this.row != other.row) {
+            return false;
+        }
+        if (this.line != other.line) {
+            return false;
+        }
+        return true;
+    }
     
 }
