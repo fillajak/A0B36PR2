@@ -4,6 +4,11 @@
  */
 package chebot.logic.Pieces;
 
+import chebot.logic.PositionList;
+import chebot.logic.DigVec;
+import chebot.logic.Position;
+import chebot.logic.enums.Direction;
+import chebot.logic.enums.Side;
 import chebot.logic.Board;
 /**
  *Represesnts Rook.

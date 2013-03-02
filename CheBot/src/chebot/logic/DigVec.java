@@ -2,7 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package chebot.logic.Pieces;
+package chebot.logic;
+
+import chebot.logic.enums.Direction;
+import chebot.logic.enums.Type;
 
 
 /**

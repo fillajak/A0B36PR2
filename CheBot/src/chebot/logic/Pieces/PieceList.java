@@ -4,6 +4,7 @@
  */
 package chebot.logic.Pieces;
 
+import chebot.logic.Position;
 import chebot.logic.LogicException;
 import java.util.LinkedList;
 

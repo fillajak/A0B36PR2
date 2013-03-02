@@ -4,8 +4,8 @@
  */
 package GUI;
 
-import chebot.logic.Pieces.Figure;
-import chebot.logic.Pieces.Side;
+import chebot.logic.enums.Figure;
+import chebot.logic.enums.Side;
 import javax.swing.JMenuItem;
 
 /**

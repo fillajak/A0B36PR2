@@ -5,16 +5,15 @@
 package chebot.logic;
 
 import chebot.logic.Pieces.Bishop;
-import chebot.logic.Pieces.Figure;
+import chebot.logic.enums.Figure;
 import chebot.logic.Pieces.King;
 import chebot.logic.Pieces.Knight;
 import chebot.logic.Pieces.Pawn;
 import chebot.logic.Pieces.Piece;
 import chebot.logic.Pieces.PieceList;
-import chebot.logic.Pieces.Position;
 import chebot.logic.Pieces.Queen;
 import chebot.logic.Pieces.Rook;
-import chebot.logic.Pieces.Side;
+import chebot.logic.enums.Side;
 
 /**
  * Represents chess board.

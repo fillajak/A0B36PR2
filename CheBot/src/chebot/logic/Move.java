@@ -5,7 +5,6 @@
 package chebot.logic;
 
 import chebot.logic.Pieces.Piece;
-import chebot.logic.Pieces.Position;
 
 /**
  *

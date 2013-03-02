@@ -5,8 +5,6 @@
 package chebot;
 
 import chebot.logic.Game;
-import chebot.logic.Pieces.Figure;
-import com.sun.xml.internal.ws.api.pipe.Fiber;
 
 /**
  *

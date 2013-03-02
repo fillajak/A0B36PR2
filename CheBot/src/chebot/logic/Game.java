@@ -5,18 +5,17 @@
 package chebot.logic;
 
 import GUI.Adder;
-import GUI.FieldGUI;
+import GUI.BoardGUI;
 import GUI.Selection;
-import chebot.logic.Pieces.Position;
-import chebot.logic.Pieces.PositionList;
-import chebot.logic.Pieces.Rook;
-import chebot.logic.Pieces.Side;
+import chebot.logic.enums.Side;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JMenuItem;
+
+
 
 /**
  *
@@ -25,14 +24,14 @@ import javax.swing.JMenuItem;
 public class Game implements ActionListener, MouseListener {
 
     public Board board;
-    private FieldGUI gui;
+    private BoardGUI gui;
     private boolean setPiece = false;
     private Position position;
     private boolean showMoves = true;
     private Side side;
 
     public Game() {
-        gui = new FieldGUI(this);
+        gui = new BoardGUI(this);
         gui.setVisible(true);
         board = new Board();
         setGame();

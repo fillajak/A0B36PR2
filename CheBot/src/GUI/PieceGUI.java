@@ -12,7 +12,7 @@ import chebot.logic.Pieces.Pawn;
 import chebot.logic.Pieces.Piece;
 import chebot.logic.Pieces.Queen;
 import chebot.logic.Pieces.Rook;
-import chebot.logic.Pieces.Side;
+import chebot.logic.enums.Side;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -28,7 +28,7 @@ import javax.swing.JPanel;
  *
  * @author Dick
  */
-public class GUI_Piece extends JPanel{
+public class PieceGUI extends JPanel{
     
     
     Image back, front, sel;
@@ -39,7 +39,7 @@ public class GUI_Piece extends JPanel{
     boolean blackBack = false;
     int sels = 2;
     int offs = 2;
-    public GUI_Piece() {
+    public PieceGUI() {
         MediaTracker tracker = new MediaTracker(this);
         blackSel = Toolkit.getDefaultToolkit().getImage("res/blackSel.png");
         tracker.addImage(blackSel, -2); 

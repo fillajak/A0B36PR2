@@ -13,7 +13,7 @@ import java.util.LinkedList;
  *
  * @author Dick
  */
-public class GUI_PieceList extends LinkedList<GUI_Piece> {
+public class PieceListGUI extends LinkedList<PieceGUI> {
     
     public void paintPiece(Piece piece){
         get(piece.getPosition().getLinePosition()).paintFromPiece(piece);
