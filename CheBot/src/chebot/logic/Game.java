@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JMenuItem;
+import javax.swing.border.Border;
 
 /**
  *
@@ -78,8 +79,10 @@ public class Game implements ActionListener, MouseListener {
             gui.paintField();
             Position pos = Position.getPositionFromLine(gui.gui_list.indexOf(e.getSource()));
             gui.paintSelected(pos, Selection.BLUE);
+            if (!board.getPieceList().isFree(pos)){
             PositionList test = board.getPieceList().getByPosition(pos).getPositionsToMove();
             gui.paintAllSelected(test, Selection.RED);
+            }
         }
     }
 
