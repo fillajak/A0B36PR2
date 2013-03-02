@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -46,9 +47,17 @@ public class Game implements ActionListener, MouseListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        if(e.getSource() instanceof JMenuItem){
+            JMenuItem m = (JMenuItem) e.getSource();
+            if ("New game".equals(m.getActionCommand())){
+                board.clear();
+                gui.paintField();
+            }
+        }
         if (e.getSource() instanceof Adder){
             Adder a = (Adder)e.getSource();
-            board.addPiece(a, position);
+            board.addPiece(a.getFigure(),a.getSide(), position);
             gui.paintField();
 
         }

@@ -53,7 +53,16 @@ public class PieceList{
     public String toString() {
         return "PieceList{" + "list=" + list + '}';
     }
-   
+   public boolean isFree(Position position){
+       try{
+           getByPosition(position);
+       }catch(LogicException ex){
+           if (ex.getCode() == LogicException.NO_PIECE_FOUND){
+               return true;
+           }
+       }
+       return false;
+   }
    
     
 }

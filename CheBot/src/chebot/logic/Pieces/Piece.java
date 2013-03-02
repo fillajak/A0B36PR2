@@ -20,12 +20,14 @@ public abstract class Piece {
     protected Board board;
     protected boolean out;
     protected LinkedList<DigVec> simpleMoves = new LinkedList<>();
+    protected boolean moved;
 
     public Piece(Side side, Position position, Board board) {
         this.side = side;
         this.position = position;
         this.board = board;
         this.out = false;
+        this.moved = false;
     }
 
     public abstract PositionList getPositionsToMove();

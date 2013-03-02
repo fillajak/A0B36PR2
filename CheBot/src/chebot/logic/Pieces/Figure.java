@@ -8,12 +8,8 @@ package chebot.logic.Pieces;
  *
  * @author Dick
  */
-public enum Figure {
-   
+public enum Figure { 
     PAWN, BISHOP, KNIGHT, ROOK, QUEEN, KING;
-    
-    
-    
 }
 
     

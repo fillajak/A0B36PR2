@@ -14,11 +14,14 @@ public class King extends Piece{
 
     public King(Side side, Position position, Board board) {
         super(side, position, board);
+         for (Direction dir: Direction.values()){
+              simpleMoves.add(new DigVec(dir, Type.JUMP));
+         }
     }
 
     @Override
     public PositionList getPositionsToMove() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return go();
     }
     
     
