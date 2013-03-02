@@ -85,7 +85,19 @@ public class Position {
     public Position getNextMove(DigVec vect){
         return new Position(row+vect.getRow(), line+ vect.getLine());
     }
+    
+    public int getLinePosition(){  
+        int xx = this.row-MIN;
+        int yy = MAX-this.line;
+        return (MAX)*yy+xx;
+    }
 
+    public static Position getPositionFromLine(int index){
+        int row, line;
+        row = index%MAX+1;
+        line = MAX-1-index/MAX+1;
+        return new Position(row, line);
+    }
     @Override
     public int hashCode() {
         int hash = 7;

@@ -50,7 +50,7 @@ public abstract class Piece {
                 try {
                     next = next.getNextMove(d);
                     System.out.println(next);
-                    piece = board.getPieceList().get(next);
+                    piece = board.getPieceList().getByPosition(next);
                     if (piece.side == this.side){
                         break;
                     }
@@ -80,4 +80,9 @@ public abstract class Piece {
     public String toString() {
         return side.getShrt()+position;
     }
+
+    public Side getSide() {
+        return side;
+    }
+    
 }

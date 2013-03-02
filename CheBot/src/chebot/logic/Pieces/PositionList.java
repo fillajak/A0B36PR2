@@ -54,6 +54,13 @@ public class PositionList {
             add(p);
         }
     }
+    
+    public Position get(int i){
+        return list.get(i);
+    }
+    public int size(){
+        return list.size();
+    }
 
     @Override
     public String toString() {

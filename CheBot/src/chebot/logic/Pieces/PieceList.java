@@ -20,7 +20,7 @@ public class PieceList{
     * @throws LogicException - if no piece is found
     * @return piece
     */
-   public Piece get(Position position){
+   public Piece getByPosition(Position position){
        for (Piece p: list){
            if (p.getPosition().equals(position) && !p.out){
                return p;
@@ -34,7 +34,7 @@ public class PieceList{
     */
    public boolean addPiece(Piece piece){
       try{
-          get(piece.getPosition());
+          getByPosition(piece.getPosition());
       }catch(LogicException ex){
           if (ex.getCode() == LogicException.NO_PIECE_FOUND){
               list.add(piece);
@@ -44,6 +44,10 @@ public class PieceList{
       
       return true;
    }
+   
+  public LinkedList<Piece> getLinkedList(){
+      return list;
+  }
 
     @Override
     public String toString() {
