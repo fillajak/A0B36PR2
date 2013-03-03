@@ -109,17 +109,12 @@ public abstract class Piece {
     public PositionList positionsToMove() {
         PositionList positions = getPositionsToMoveUnchecked();
         PositionList valid = new PositionList();
-        for (Position p : positions.getList()) {
-           // Move m = new Move(position, p, board);
-         //   m.execute();
-               
+        for (Position p : positions.getList()) {    
             testMove(p, history.getLast().index+1);
             if (!board.getPieceList().hasCheck(side)) {
                 valid.add(p);
             }
-          //  m.reverse();
              undoLastMove();
-
         }
 
         return valid;

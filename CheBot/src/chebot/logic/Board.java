@@ -26,7 +26,6 @@ public class Board {
 
     private int globalNumber = 0;;
     private PieceList pieceList = new PieceList();
-    private LinkedList<Move> history = new LinkedList<>();
 
     /**
      * Contains all pieces.
