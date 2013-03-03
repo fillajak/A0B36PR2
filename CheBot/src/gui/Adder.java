@@ -1,0 +1,37 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package gui;
+
+import chebot.logic.enums.Figure;
+import chebot.logic.enums.Side;
+import javax.swing.JMenuItem;
+
+/**
+ *
+ * @author Dick
+ */
+public class Adder extends JMenuItem{
+    private Figure figure;
+    private Side side;
+
+    public Adder(Figure figure, Side side, String text) {
+        super(text);
+        this.figure = figure;
+        this.side = side;
+    }
+
+    public Figure getFigure() {
+        return figure;
+    }
+
+    public Side getSide() {
+        return side;
+    }
+    
+    
+    
+    
+    
+}

@@ -4,16 +4,16 @@
  */
 package chebot.logic.Pieces;
 
-import chebot.logic.PositionList;
+import chebot.logic.Board;
 import chebot.logic.DigVec;
+import chebot.logic.LogicException;
 import chebot.logic.Position;
+import chebot.logic.PositionList;
 import chebot.logic.enums.Side;
 import chebot.logic.enums.Type;
-import chebot.logic.Board;
-import chebot.logic.LogicException;
-import chebot.logic.Move;
-import chebot.logic.Pieces.Piece;
 import java.util.LinkedList;
+
+
 
 /**
  *Represents one pieceon board. Has referece to board.
@@ -45,18 +45,14 @@ public abstract class Piece {
  * @return - positions 
  */
     protected final PositionList go() {
-
         Position next;
         Piece piece;
         PositionList res = new PositionList();
-
-
         for (DigVec d : simpleMoves) {
             next = position.clone();
             while (true) {
                 try {
                     next = next.getNextMove(d);
-                    System.out.println(next);
                     piece = board.getPieceList().getByPosition(next);
                     if (piece.side == this.side){
                         break;

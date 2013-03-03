@@ -1,26 +1,26 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this template, choose Tools | Templates
+* and open the template in the editor.
+*/
 package chebot.logic.Pieces;
 
-import chebot.logic.Position;
 import chebot.logic.LogicException;
+import chebot.logic.Position;
 import java.util.LinkedList;
 
 /**
- *
- * @author Dick
- */
+*
+* @author Dick
+*/
 public class PieceList{
     private LinkedList<Piece> list = new LinkedList<>();
     
    /**
-    * Gets piece from list on defined position. Takes first one. Ignores pieces with out == true;
-    * @param position
-    * @throws LogicException - if no piece is found
-    * @return piece
-    */
+* Gets piece from list on defined position. Takes first one. Ignores pieces with out == true;
+* @param position
+* @throws LogicException - if no piece is found
+* @return piece
+*/
    public Piece getByPosition(Position position){
        for (Piece p: list){
            if (p.getPosition().equals(position) && !p.out){
@@ -30,9 +30,9 @@ public class PieceList{
        throw new LogicException("no pieces found on position: " +position, LogicException.NO_PIECE_FOUND);
    }
    /**
-    * Adds single piece to list.
-    * @return true if no pieces of same position was found, false otherwise. 
-    */
+* Adds single piece to list.
+* @return true if no pieces of same position was found, false otherwise.
+*/
    public boolean addPiece(Piece piece){
       try{
           getByPosition(piece.getPosition());

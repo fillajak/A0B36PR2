@@ -4,9 +4,9 @@
  */
 package chebot.logic;
 
-import GUI.Adder;
-import GUI.BoardGUI;
-import GUI.Selection;
+import gui.Adder;
+import gui.BoardGUI;
+import gui.Selection;
 import chebot.logic.enums.Side;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
@@ -14,8 +14,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JMenuItem;
-
-
 
 /**
  *
@@ -46,17 +44,17 @@ public class Game implements ActionListener, MouseListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-        if(e.getSource() instanceof JMenuItem){
+
+        if (e.getSource() instanceof JMenuItem) {
             JMenuItem m = (JMenuItem) e.getSource();
-            if ("New game".equals(m.getActionCommand())){
+            if ("New game".equals(m.getActionCommand())) {
                 board.clear();
                 gui.paintField();
             }
         }
-        if (e.getSource() instanceof Adder){
-            Adder a = (Adder)e.getSource();
-            board.addPiece(a.getFigure(),a.getSide(), position);
+        if (e.getSource() instanceof Adder) {
+            Adder a = (Adder) e.getSource();
+            board.addPiece(a.getFigure(), a.getSide(), position);
             gui.paintField();
 
         }
@@ -70,15 +68,17 @@ public class Game implements ActionListener, MouseListener {
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON3) {
             Position pos = Position.getPositionFromLine(gui.gui_list.indexOf(e.getSource()));
-              gui.popUp.show(e.getComponent(), e.getX(), e.getY());
-              position = pos;
+            gui.popUp.show(e.getComponent(), e.getX(), e.getY());
+            position = pos;
         }
         if (e.getButton() == MouseEvent.BUTTON1) {
             gui.paintField();
             Position pos = Position.getPositionFromLine(gui.gui_list.indexOf(e.getSource()));
             gui.paintSelected(pos, Selection.BLUE);
-            PositionList test = board.getPieceList().getByPosition(pos).getPositionsToMove();
-            gui.paintAllSelected(test, Selection.RED);
+            if (!board.getPieceList().isFree(pos)) {
+                PositionList test = board.getPieceList().getByPosition(pos).getPositionsToMove();
+                gui.paintAllSelected(test, Selection.RED);
+            }
         }
     }
 
