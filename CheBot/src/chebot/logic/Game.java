@@ -4,9 +4,9 @@
  */
 package chebot.logic;
 
-import gui.Adder;
-import gui.BoardGUI;
-import gui.Selection;
+import rr.Adder;
+import rr.BoardGUI;
+import rr.Selection;
 import chebot.logic.enums.Side;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
