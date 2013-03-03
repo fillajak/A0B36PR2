@@ -79,6 +79,21 @@ public class PieceList {
         }
         return true;
     }
+    public void undoMovesWithHighestNumber(){
+        int max = 0;
+        for(Piece p : this.list){
+            if (p.history.getLast().index>max){
+                max = p.history.getLast().index;
+            }
+        }
+        for(Piece p: this.list){
+            if(p.history.getLast().index == max){
+                p.undoLastMove();
+            }
+        }
+       
+       
+    }
 
     /**
      * Determinates, which positions are endagered from specified side.

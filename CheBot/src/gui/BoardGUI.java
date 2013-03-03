@@ -42,8 +42,8 @@ public class BoardGUI extends JFrame {
     private Game game;
     private JPanel game_panel, mainPanel;
     private JMenuBar menuBar;
-    private JMenuItem exit, newGame, undo, showMove;
-    private JMenu gameMenu, editMenu;
+    private JMenuItem exit, newGame, undo, showMove, status;
+    private JMenu gameMenu, editMenu, testMenu;
     private JTextArea history;
     private JScrollPane historyPane;
     public JPopupMenu popUp;
@@ -68,6 +68,7 @@ public class BoardGUI extends JFrame {
         menuBar = new JMenuBar();
         gameMenu = new JMenu("Game");
         editMenu = new JMenu("Edit");
+        testMenu = new JMenu("testing");
         
         
         showMove = new JCheckBoxMenuItem("Show moves", true);
@@ -86,12 +87,19 @@ public class BoardGUI extends JFrame {
         undo.addActionListener(game);
         editMenu.add(undo);
         
+        status = new JMenuItem("Status");
+     
+        status.addActionListener(game);
+        testMenu.add(status);
+        
+        
         gameMenu.add(newGame);
         gameMenu.add(exit);
         gameMenu.add(showMove);
         menuBar.add(gameMenu);
         
         menuBar.add(editMenu);
+        menuBar.add(testMenu);
         history = new JTextArea();
      //   history.setLineWrap(true);
         history.setEditable(false);

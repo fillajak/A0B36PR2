@@ -22,7 +22,9 @@ public class PieceListGUI extends LinkedList<PieceGUI> {
     public void paintField(PieceList pieces){
       eraseAll();
       for (Piece p: pieces.getLinkedList()){
-          paintPiece(p);
+          if(!p.isOut()){
+              paintPiece(p);
+          }
       }
     }
     public void eraseAll(){

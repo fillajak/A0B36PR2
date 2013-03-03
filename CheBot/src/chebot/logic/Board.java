@@ -24,7 +24,7 @@ import java.util.LinkedList;
  */
 public class Board {
 
-    private int globalNumber;
+    private int globalNumber = 0;;
     private PieceList pieceList = new PieceList();
     private LinkedList<Move> history = new LinkedList<>();
 
@@ -41,6 +41,7 @@ public class Board {
         return pieceList.toString();
     }
     public void clear(){
+        globalNumber = 0;
         pieceList.getLinkedList().clear();
     }
 
@@ -48,8 +49,17 @@ public class Board {
         return globalNumber;
     }
     
-    public void Move(Position from, Position to){
-        
+    public String move(Position from, Position to){
+        String out;
+        Piece p = pieceList.getByPosition(from);
+        out = p.toString();
+        out +=" to "+to;
+        out += " "+p.move(to, ++globalNumber);
+        return globalNumber+". "+out;
+    }
+    public void undoLast(){
+        pieceList.undoMovesWithHighestNumber();
+        globalNumber--;
     }
     
 /**

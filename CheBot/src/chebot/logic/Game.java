@@ -55,10 +55,16 @@ public class Game implements ActionListener, MouseListener {
                 System.out.println("show possible moves");
                 gui.paintAllSelected(board.getPieceList().getAllMoves(Side.BLACK), Selection.RED);
             }
-            if ("Undo".equals(m.getActionCommand())){
+            if ("Undo".equals(m.getActionCommand())) {
+                gui.setHistoryWrap("undo");
+                board.undoLast();
+                setPiece = false;
+                gui.paintField();
+
+            }
+            if ("Status".equals(m.getActionCommand())) {
                 gui.setHistoryWrap(
-                "status? "+ board.getPieceList().getStatus(Side.WHITE));
-               
+                        "status of white? " + board.getPieceList().getStatus(Side.WHITE));
             }
         }
         if (e.getSource() instanceof Adder) {
@@ -84,10 +90,28 @@ public class Game implements ActionListener, MouseListener {
             gui.paintField();
             Position pos = Position.getPositionFromLine(gui.gui_list.indexOf(e.getSource()));
             gui.paintSelected(pos, Selection.BLUE);
-            if (!board.getPieceList().isFree(pos)) {
-                PositionList test = board.getPieceList().getByPosition(pos).positionsToMove();
-                gui.paintAllSelected(test, Selection.RED);
+            if (!setPiece) {
+                if (!board.getPieceList().isFree(pos)) {
+                    PositionList test = board.getPieceList().getByPosition(pos).positionsToMove();
+                    gui.paintAllSelected(test, Selection.RED);
+
+                    position = pos;
+                    setPiece = true;
+                }
+            } else {
+                // System.out.println("tah z " + position + " na " + pos);
+                try{
+                    gui.setHistoryWrap(board.move(position, pos));
+                }catch(LogicException ex){
+                    if (ex.getCode() != LogicException.CANT_MOVE){
+                        throw ex;
+                    }
+                }
+                setPiece = false;
+                gui.paintField();
+                
             }
+
         }
     }
 
