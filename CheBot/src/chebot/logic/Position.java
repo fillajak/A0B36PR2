@@ -57,6 +57,9 @@ public class Position {
         this.line = line;
     }
 
+    public void changePosition(Position position){
+        changePosition(position.row, position.line);
+    }
     @Override
     public String toString() {
         return "[" + (char) (row - 1 + 'A')  + line + "]";

@@ -26,7 +26,7 @@ public class Queen extends Piece{
     }
 
     @Override
-    public PositionList getPositionsToMove() {
+    public PositionList getPositionsToMoveUnchecked() {
         return go();
     }
     

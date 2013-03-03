@@ -18,5 +18,12 @@ public enum Side {
     public String getShrt() {
         return shrt;
     }
+    public Side getOponent(){
+        switch(this){
+            case WHITE: return BLACK;
+            case BLACK: return WHITE;
+        }
+        return null;
+    }
     
 }

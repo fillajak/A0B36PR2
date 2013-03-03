@@ -67,4 +67,11 @@ public class PositionList {
     public String toString() {
         return "PositionList{" + "list=" + list + '}';
     }
+
+    public LinkedList<Position> getList() {
+        return list;
+    }
+  
+
+    
 }

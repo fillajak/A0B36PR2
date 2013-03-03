@@ -51,6 +51,15 @@ public class Game implements ActionListener, MouseListener {
                 board.clear();
                 gui.paintField();
             }
+            if ("Exit".equals(m.getActionCommand())) {
+                System.out.println("show possible moves");
+                gui.paintAllSelected(board.getPieceList().getAllMoves(Side.BLACK), Selection.RED);
+            }
+            if ("Undo".equals(m.getActionCommand())){
+                gui.setHistoryWrap(
+                "status? "+ board.getPieceList().getStatus(Side.WHITE));
+               
+            }
         }
         if (e.getSource() instanceof Adder) {
             Adder a = (Adder) e.getSource();
@@ -76,7 +85,7 @@ public class Game implements ActionListener, MouseListener {
             Position pos = Position.getPositionFromLine(gui.gui_list.indexOf(e.getSource()));
             gui.paintSelected(pos, Selection.BLUE);
             if (!board.getPieceList().isFree(pos)) {
-                PositionList test = board.getPieceList().getByPosition(pos).getPositionsToMove();
+                PositionList test = board.getPieceList().getByPosition(pos).positionsToMove();
                 gui.paintAllSelected(test, Selection.RED);
             }
         }

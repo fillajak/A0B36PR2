@@ -26,14 +26,11 @@ public class Rook extends Piece{
     }
 
     @Override
-    public PositionList getPositionsToMove() {
+    public PositionList getPositionsToMoveUnchecked() {
         return go();
     }
 
-    @Override
-    public String toString() {
-        return "R"+super.toString();
-    }
+  
     
     
 
