@@ -27,7 +27,7 @@ public abstract class Piece {
     protected boolean out;
     protected LinkedList<DigVec> simpleMoves = new LinkedList<>();
     protected boolean moved;
-    protected LinkedList<Move2> history = new LinkedList<>();
+    protected LinkedList<Position> history = new LinkedList<>();
 
     public Piece(Side side, Position position, Board board) {
         this.side = side;
@@ -35,53 +35,64 @@ public abstract class Piece {
         this.board = board;
         this.out = false;
         this.moved = false;
-        this.history.add(new Move2(0, position, this));
     }
-    public boolean isOut(){
+
+    public boolean isOut() {
         return out;
     }
 
-    public String move(Position position, int index) {
-        if (positionsToMove().conntains(position)) {
-            return testMove(position, index);
-        }
-        else{
-            throw new LogicException("cant move", 3);
-        }
+    public void move(Position position) {
+        history.add(this.position.clone());
+        this.position.changePosition(position);
+        moved = true;
+    }
 
-    }
-    private String testMove(Position position, int index){
-            Piece kicked;
-            try {
-                kicked = board.getPieceList().getByPosition(position);
-                kicked.out = true;
-            } catch (LogicException ex) {
-                kicked = null;
-            }
-            history.add(new Move2(index, position, kicked));
-            this.moved = true;
-            this.position.changePosition(position);
-            if (kicked == null){
-                return "";
-            }
-            else {
-                return kicked.getTag();
-            }
-    }
-    public void undoLastMove(){
-        if (history.size()<=1){
+    public void undoLastMove() {
+        if (history.isEmpty()) {
             throw new LogicException("cant undo", -1);
+        } else {
+            if (history.size() == 1) {
+                moved = false;
+            }
+            position.changePosition(history.removeLast());
         }
-        Move2 last = history.removeLast();
-        if (last.out != null){
-            last.out.out=false;
-        }
-        if (history.size() == 1){
-            moved = false;
-        }
-        position.changePosition(history.getLast().to);
     }
 
+    public LinkedList<Position> getHistory() {
+        return history;
+    }
+
+    /*  private String testMove(Position position, int index){
+     Piece kicked;
+     try {
+     kicked = board.getPieceList().getByPosition(position);
+     kicked.out = true;
+     } catch (LogicException ex) {
+     kicked = null;
+     }
+     history.add(new Move2(index, position, kicked));
+     this.moved = true;
+     this.position.changePosition(position);
+     if (kicked == null){
+     return "";
+     }
+     else {
+     return kicked.getTag();
+     }
+     }*/
+    /* private void undoLastMove(){
+     if (history.size()<=1){
+     throw new LogicException("cant undo", -1);
+     }
+     Move2 last = history.removeLast();
+     if (last.out != null){
+     last.out.out=false;
+     }
+     if (history.size() == 1){
+     moved = false;
+     }
+     position.changePosition(history.getLast().to);
+     }*/
     /**
      * Generates list of positions on which can this piece move. This method
      * dont check board for unwanted situations.
@@ -106,20 +117,19 @@ public abstract class Piece {
      *
      * @return checked positions to move
      */
-    public PositionList positionsToMove() {
-        PositionList positions = getPositionsToMoveUnchecked();
-        PositionList valid = new PositionList();
-        for (Position p : positions.getList()) {    
-            testMove(p, history.getLast().index+1);
-            if (!board.getPieceList().hasCheck(side)) {
-                valid.add(p);
-            }
-             undoLastMove();
-        }
+    /*  public PositionList positionsToMove() {
+     PositionList positions = getPositionsToMoveUnchecked();
+     PositionList valid = new PositionList();
+     for (Position p : positions.getList()) {    
+     testMove(p, history.getLast().index+1);
+     if (!board.getPieceList().hasCheck(side)) {
+     valid.add(p);
+     }
+     undoLastMove();
+     }
 
-        return valid;
-    }
-
+     return valid;
+     }*/
     public Position getPosition() {
         return position;
     }
@@ -170,18 +180,23 @@ public abstract class Piece {
     public final String toString() {
         return getTag() + position;
     }
-    public String getTag(){
-          String shrt; 
-            if (this instanceof Knight){
-                shrt = "N";
-            }
-            else{
-                shrt = this.getClass().getSimpleName().charAt(0)+"";
-            }
-             return side.getShrt() + shrt;
+
+    public String getTag() {
+        String shrt;
+        if (this instanceof Knight) {
+            shrt = "N";
+        } else {
+            shrt = this.getClass().getSimpleName().charAt(0) + "";
+        }
+        return side.getShrt() + shrt;
     }
 
     public Side getSide() {
         return side;
+    }
+
+    public MoveList getMoves() {
+        MoveList mlist = new MoveList(this);
+        return mlist;
     }
 }

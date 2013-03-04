@@ -8,14 +8,13 @@ import chebot.logic.Pieces.Bishop;
 import chebot.logic.enums.Figure;
 import chebot.logic.Pieces.King;
 import chebot.logic.Pieces.Knight;
-import chebot.logic.Pieces.Move;
 import chebot.logic.Pieces.Pawn;
 import chebot.logic.Pieces.Piece;
 import chebot.logic.Pieces.PieceList;
 import chebot.logic.Pieces.Queen;
 import chebot.logic.Pieces.Rook;
 import chebot.logic.enums.Side;
-import java.util.LinkedList;
+import chebot.logic.Pieces.MoveList;
 
 /**
  * Represents chess board.
@@ -26,6 +25,7 @@ public class Board {
 
     private int globalNumber = 0;;
     private PieceList pieceList = new PieceList();
+    public MoveList history = new MoveList();
 
     /**
      * Contains all pieces.
@@ -48,18 +48,18 @@ public class Board {
         return globalNumber;
     }
     
-    public String move(Position from, Position to){
+ /*   public String move(Position from, Position to){
         String out;
         Piece p = pieceList.getByPosition(from);
         out = p.toString();
         out +=" to "+to;
         out += " "+p.move(to, ++globalNumber);
         return globalNumber+". "+out;
-    }
-    public void undoLast(){
+    }*/
+  /*  public void undoLast(){
         pieceList.undoMovesWithHighestNumber();
         globalNumber--;
-    }
+    }*/
     
 /**
  * Adds piece to board.

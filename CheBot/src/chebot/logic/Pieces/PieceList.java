@@ -79,7 +79,7 @@ public class PieceList {
         }
         return true;
     }
-    public void undoMovesWithHighestNumber(){
+  /*  public void undoMovesWithHighestNumber(){
         int max = 0;
         for(Piece p : this.list){
             if (p.history.getLast().index>max){
@@ -93,7 +93,7 @@ public class PieceList {
         }
        
        
-    }
+    }*/
 
     /**
      * Determinates, which positions are endagered from specified side.
@@ -137,7 +137,7 @@ public class PieceList {
         }
         throw new LogicException("no king found", -1);
     }
-    public PositionList getAllMoves(Side side){
+   /* public PositionList getAllMoves(Side side){
         PositionList ret = new PositionList();
         for (Piece p: this.list){
             if (p.side == side){
@@ -145,8 +145,8 @@ public class PieceList {
             }
         }
         return ret;
-    }
-    public Status getStatus(Side side){
+    }*/
+   /* public Status getStatus(Side side){
         if (!hasCheck(side)){
             if (getAllMoves(side).getList().isEmpty()){
                 return Status.TIE;
@@ -165,7 +165,7 @@ public class PieceList {
             }
         }
         
-    }
+    }*/
     
 
     public LinkedList<Piece> getLinkedList() {

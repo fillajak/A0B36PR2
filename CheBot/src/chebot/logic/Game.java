@@ -4,6 +4,8 @@
  */
 package chebot.logic;
 
+import chebot.logic.Pieces.Piece;
+import chebot.logic.Pieces.Rook;
 import gui.Adder;
 import gui.BoardGUI;
 import gui.Selection;
@@ -37,6 +39,8 @@ public class Game implements ActionListener, MouseListener {
 
     private void setGame() {
         gui.paintField();
+       
+        
     }
 
     public void turn(Position pos) {
@@ -53,18 +57,18 @@ public class Game implements ActionListener, MouseListener {
             }
             if ("Exit".equals(m.getActionCommand())) {
                 System.out.println("show possible moves");
-                gui.paintAllSelected(board.getPieceList().getAllMoves(Side.BLACK), Selection.RED);
+             //   gui.paintAllSelected(board.getPieceList().getAllMoves(Side.BLACK), Selection.RED);
             }
             if ("Undo".equals(m.getActionCommand())) {
                 gui.setHistoryWrap("undo");
-                board.undoLast();
+             //   board.undoLast();
                 setPiece = false;
                 gui.paintField();
 
             }
             if ("Status".equals(m.getActionCommand())) {
-                gui.setHistoryWrap(
-                        "status of white? " + board.getPieceList().getStatus(Side.WHITE));
+               // gui.setHistoryWrap(
+              //          "status of white? " + board.getPieceList().getStatus(Side.WHITE));
             }
         }
         if (e.getSource() instanceof Adder) {
@@ -92,7 +96,7 @@ public class Game implements ActionListener, MouseListener {
             gui.paintSelected(pos, Selection.BLUE);
             if (!setPiece) {
                 if (!board.getPieceList().isFree(pos)) {
-                    PositionList test = board.getPieceList().getByPosition(pos).positionsToMove();
+                    PositionList test = board.getPieceList().getByPosition(pos).getMoves().getPositionsToMove(pos);
                     gui.paintAllSelected(test, Selection.RED);
 
                     position = pos;
@@ -101,7 +105,7 @@ public class Game implements ActionListener, MouseListener {
             } else {
                 // System.out.println("tah z " + position + " na " + pos);
                 try{
-                    gui.setHistoryWrap(board.move(position, pos));
+                  //  gui.setHistoryWrap(board.move(position, pos));
                 }catch(LogicException ex){
                     if (ex.getCode() != LogicException.CANT_MOVE){
                         throw ex;

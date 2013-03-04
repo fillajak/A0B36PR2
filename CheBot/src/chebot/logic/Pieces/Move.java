@@ -5,70 +5,71 @@
 package chebot.logic.Pieces;
 
 import chebot.logic.Board;
+import chebot.logic.LogicException;
 import chebot.logic.Pieces.Piece;
 import chebot.logic.Position;
+import chebot.logic.PositionList;
 
 /**
  *
  * @author Dick
  */
-public class Move {//osetrit nezadouci stavy -mozna uplne predelat
+public abstract class Move {
+
     Position from;
     Position to;
     Piece out;
+    int value;
     Board board;
-    int number;
-    int globalNumber;
-    
+
     public Move(Position from, Position to, Board board) {
         this.from = from.clone();
         this.to = to.clone();
         this.board = board;
-        this.globalNumber = board.getGlobalNumber();
-        number = 0;
+        this.out = null;
+        
+ 
     }
+
+    protected void execute() {
+        Piece p = board.getPieceList().getByPosition(from);
+        try {
+                out = board.getPieceList().getByPosition(to);
+            } catch (LogicException ex) {
+                if (ex.getCode() != LogicException.NO_PIECE_FOUND) {
+                    throw ex;
+                }
+            }
+        p.move(to);
+        if (board.getPieceList().hasCheck(p.side)) {
+            p.undoLastMove();
+            throw new LogicException("unexecutable move", LogicException.CANT_MOVE);
+        } else {
+            if (out!= null){
+                out.out = true;
+            }
+            
+        }
+      
+    }
+
     
-  
-    
-   public void execute(){
-       Piece moving = board.getPieceList().getByPosition(from);
-       moving.moved = true;
-       if (!board.getPieceList().isFree(to) && board.getPieceList().getByPosition(to).getSide() !=moving.getSide()){
-           out = board.getPieceList().getByPosition(to);
-           this.out.out = true;
-       }
-       else{
-           out =null;
-       }
-       moving.getPosition().changePosition(to);
-       number++;
-       
-       
-   }
-   public void reverse(){
-       Piece back = board.getPieceList().getByPosition(to);
-       back.position.changePosition(from);
-       if (out!=null){
-           board.getPieceList().getByPositionOut(to).out = false;
-       }
-       if (--number == 0){
-           back.moved = false;
-       } 
-   }
+
+    public void reverse() {
+        Piece p = board.getPieceList().getByPosition(to);
+        p.undoLastMove();
+        if (out != null) {
+                out.out = false;
+            }
+    }
+
+    public PositionList getPositionsToMove() {
+        return null;
+    }
 
     @Override
     public String toString() {
-        return "Move from "+ from +" to "+ to +", globalNumber = " +globalNumber+ " out = "+ out;
+        return "Move{" + "from=" + from + ", to=" + to + ", out=" + out + '}';
     }
-   
-   
-    
-    
-    
-
-    
-    
-    
-    
     
 }
