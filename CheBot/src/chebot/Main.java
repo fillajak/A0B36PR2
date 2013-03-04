@@ -6,10 +6,10 @@ package chebot;
 
 import chebot.logic.Board;
 import chebot.logic.Game;
-import chebot.logic.Pieces.Pawn;
-import chebot.logic.Pieces.Piece;
-import chebot.logic.Pieces.Queen;
-import chebot.logic.Pieces.Rook;
+import chebot.logic.piece.Pawn;
+import chebot.logic.piece.Piece;
+import chebot.logic.piece.Queen;
+import chebot.logic.piece.Rook;
 import chebot.logic.Position;
 import chebot.logic.enums.Figure;
 import chebot.logic.enums.Side;

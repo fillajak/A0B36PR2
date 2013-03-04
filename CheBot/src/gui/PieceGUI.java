@@ -5,13 +5,13 @@
 package gui;
 
 
-import chebot.logic.Pieces.Bishop;
-import chebot.logic.Pieces.King;
-import chebot.logic.Pieces.Knight;
-import chebot.logic.Pieces.Pawn;
-import chebot.logic.Pieces.Piece;
-import chebot.logic.Pieces.Queen;
-import chebot.logic.Pieces.Rook;
+import chebot.logic.piece.Bishop;
+import chebot.logic.piece.King;
+import chebot.logic.piece.Knight;
+import chebot.logic.piece.Pawn;
+import chebot.logic.piece.Piece;
+import chebot.logic.piece.Queen;
+import chebot.logic.piece.Rook;
 import chebot.logic.enums.Side;
 import java.awt.Color;
 import java.awt.Graphics;

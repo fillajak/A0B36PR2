@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package chebot.logic.Pieces;
+package chebot.logic.piece;
 
 import chebot.logic.PositionList;
 import chebot.logic.DigVec;
@@ -12,8 +12,11 @@ import chebot.logic.enums.Side;
 import chebot.logic.enums.Type;
 import chebot.logic.Board;
 import chebot.logic.LogicException;
+import chebot.logic.move.Move;
+import chebot.logic.move.MoveList;
+import chebot.logic.move.Multiple;
+import chebot.logic.move.Simple;
 import java.util.LinkedList;
-import javax.swing.border.Border;
 
 /**
  *
@@ -30,10 +33,15 @@ public class King extends Piece {
 
     @Override
     public PositionList getPositionsToMoveUnchecked() {
-        PositionList positionList = go();
-        DigVec dir = new DigVec(Direction.RIGHT);
+        return go();
+    }
+
+    @Override
+    public MoveList getMoves() {
+        MoveList moves = super.getMoves();
+        
+         DigVec dir = new DigVec(Direction.RIGHT);
         boolean free;
-        boolean castle = false;
         LinkedList<Integer> l = new LinkedList<>();
         l.add(2);
         l.add(3);
@@ -52,8 +60,11 @@ public class King extends Piece {
                     Position last = next.getNextMove(dir);
                     Piece rook = board.getPieceList().getByPosition(last);
                     if (!rook.moved && rook.side == side) {
-                        positionList.add(position.getNextMove(dir).getNextMove(dir));
-                        castle = true;
+                        Position to = position.getNextMove(dir).getNextMove(dir);                       
+                        LinkedList<Move> other = new LinkedList<>();
+                        other.add(new Simple(last, position.getNextMove(dir), board));
+                        moves.add(new Multiple(position.clone(), to, board, other));
+                       
                     }
                 }}catch(LogicException ex){
                     if (ex.getCode() != LogicException.NO_PIECE_FOUND){
@@ -64,9 +75,11 @@ public class King extends Piece {
 
             }
         }
-     
-        return positionList;
+        
+        return moves;
     }
+    
+    
 
 
 }

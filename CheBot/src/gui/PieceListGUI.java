@@ -5,8 +5,8 @@
 package gui;
 
 
-import chebot.logic.Pieces.Piece;
-import chebot.logic.Pieces.PieceList;
+import chebot.logic.piece.Piece;
+import chebot.logic.piece.PieceList;
 import java.util.LinkedList;
 
 /**

@@ -4,8 +4,8 @@
  */
 package chebot.logic;
 
-import chebot.logic.Pieces.Piece;
-import chebot.logic.Pieces.Rook;
+import chebot.logic.piece.Piece;
+import chebot.logic.piece.Rook;
 import gui.Adder;
 import gui.BoardGUI;
 import gui.Selection;
@@ -60,15 +60,15 @@ public class Game implements ActionListener, MouseListener {
              //   gui.paintAllSelected(board.getPieceList().getAllMoves(Side.BLACK), Selection.RED);
             }
             if ("Undo".equals(m.getActionCommand())) {
-                gui.setHistoryWrap("undo");
-             //   board.undoLast();
+                gui.setHistoryWrap(board.undoLast());
+                
                 setPiece = false;
                 gui.paintField();
 
             }
             if ("Status".equals(m.getActionCommand())) {
-               // gui.setHistoryWrap(
-              //          "status of white? " + board.getPieceList().getStatus(Side.WHITE));
+                gui.setHistoryWrap(
+                        "status of white? " + board.getPieceList().getStatus(Side.WHITE));
             }
         }
         if (e.getSource() instanceof Adder) {
@@ -103,9 +103,10 @@ public class Game implements ActionListener, MouseListener {
                     setPiece = true;
                 }
             } else {
-                // System.out.println("tah z " + position + " na " + pos);
+                
                 try{
-                  //  gui.setHistoryWrap(board.move(position, pos));
+                    gui.setHistoryWrap(board.move(position, pos));
+                    
                 }catch(LogicException ex){
                     if (ex.getCode() != LogicException.CANT_MOVE){
                         throw ex;

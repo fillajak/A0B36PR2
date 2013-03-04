@@ -4,17 +4,18 @@
  */
 package chebot.logic;
 
-import chebot.logic.Pieces.Bishop;
+import chebot.logic.piece.Bishop;
 import chebot.logic.enums.Figure;
-import chebot.logic.Pieces.King;
-import chebot.logic.Pieces.Knight;
-import chebot.logic.Pieces.Pawn;
-import chebot.logic.Pieces.Piece;
-import chebot.logic.Pieces.PieceList;
-import chebot.logic.Pieces.Queen;
-import chebot.logic.Pieces.Rook;
+import chebot.logic.piece.King;
+import chebot.logic.piece.Knight;
+import chebot.logic.move.Move;
+import chebot.logic.piece.Pawn;
+import chebot.logic.piece.Piece;
+import chebot.logic.piece.PieceList;
+import chebot.logic.piece.Queen;
+import chebot.logic.piece.Rook;
 import chebot.logic.enums.Side;
-import chebot.logic.Pieces.MoveList;
+import java.util.LinkedList;
 
 /**
  * Represents chess board.
@@ -23,9 +24,10 @@ import chebot.logic.Pieces.MoveList;
  */
 public class Board {
 
-    private int globalNumber = 0;;
     private PieceList pieceList = new PieceList();
-    public MoveList history = new MoveList();
+    public LinkedList<Move> history = new LinkedList<>();
+    
+    
 
     /**
      * Contains all pieces.
@@ -40,26 +42,23 @@ public class Board {
         return pieceList.toString();
     }
     public void clear(){
-        globalNumber = 0;
         pieceList.getLinkedList().clear();
+        history.clear();
     }
 
-    public int getGlobalNumber() {
-        return globalNumber;
+
+    public String move(Position from, Position to){
+        String s = (history.size()+1)+". "+pieceList.getByPosition(from).getMoves().executeMove(from, to);
+        return s;
+        
     }
-    
- /*   public String move(Position from, Position to){
-        String out;
-        Piece p = pieceList.getByPosition(from);
-        out = p.toString();
-        out +=" to "+to;
-        out += " "+p.move(to, ++globalNumber);
-        return globalNumber+". "+out;
-    }*/
-  /*  public void undoLast(){
-        pieceList.undoMovesWithHighestNumber();
-        globalNumber--;
-    }*/
+    public String undoLast(){
+        Move m = history.getLast();
+        return "undo: "+ m.reverse(true);
+    }
+    public Piece getPiece(Position position){
+        return pieceList.getByPosition(position);
+    }
     
 /**
  * Adds piece to board.

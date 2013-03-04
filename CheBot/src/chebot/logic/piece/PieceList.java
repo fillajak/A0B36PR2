@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package chebot.logic.Pieces;
+package chebot.logic.piece;
 
 import chebot.logic.LogicException;
 import chebot.logic.Position;
@@ -79,21 +79,6 @@ public class PieceList {
         }
         return true;
     }
-  /*  public void undoMovesWithHighestNumber(){
-        int max = 0;
-        for(Piece p : this.list){
-            if (p.history.getLast().index>max){
-                max = p.history.getLast().index;
-            }
-        }
-        for(Piece p: this.list){
-            if(p.history.getLast().index == max){
-                p.undoLastMove();
-            }
-        }
-       
-       
-    }*/
 
     /**
      * Determinates, which positions are endagered from specified side.
@@ -137,16 +122,26 @@ public class PieceList {
         }
         throw new LogicException("no king found", -1);
     }
-   /* public PositionList getAllMoves(Side side){
+    /**
+     * Gets all moves by, which van be executed by selected side.
+     * @param side side that moves
+     * @return all moves
+     */
+    public PositionList getAllMoves(Side side){
         PositionList ret = new PositionList();
         for (Piece p: this.list){
             if (p.side == side){
-                ret.addAll(p.positionsToMove());
+                ret.addAll(p.getMoves().getPositionsToMove(p.position));
             }
         }
         return ret;
-    }*/
-   /* public Status getStatus(Side side){
+    }
+    /**
+     * Returns status of field.
+     * @param side supervised side
+     * @return TIE, CHECK, CHECK_MATE, NORMAL - nothing prev.
+     */
+    public Status getStatus(Side side){
         if (!hasCheck(side)){
             if (getAllMoves(side).getList().isEmpty()){
                 return Status.TIE;
@@ -165,8 +160,8 @@ public class PieceList {
             }
         }
         
-    }*/
-    
+    }
+   
 
     public LinkedList<Piece> getLinkedList() {
         return list;
