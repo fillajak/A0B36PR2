@@ -39,8 +39,8 @@ public class King extends Piece {
     @Override
     public MoveList getMoves() {
         MoveList moves = super.getMoves();
-        
-         DigVec dir = new DigVec(Direction.RIGHT);
+
+        DigVec dir = new DigVec(Direction.RIGHT);
         boolean free;
         LinkedList<Integer> l = new LinkedList<>();
         l.add(2);
@@ -50,24 +50,35 @@ public class King extends Piece {
                 Position next = position;
                 free = true;
                 for (int i = 0; i < it; i++) {
-                    next = next.getNextMove(dir);
+                    try {
+                        next = next.getNextMove(dir);
+                    } catch (LogicException ex) {
+                        if (ex.getCode() != LogicException.OUT_OF_FIELD_CODE) {
+                            throw ex;
+                        }
+                        else{
+                            free = false;
+                            break;      
+                        }
+                    }
                     if (!board.getPieceList().isFree(next)) {
                         free = false;
                     }
                 }
-                try{
-                if (free) {
-                    Position last = next.getNextMove(dir);
-                    Piece rook = board.getPieceList().getByPosition(last);
-                    if (!rook.moved && rook.side == side) {
-                        Position to = position.getNextMove(dir).getNextMove(dir);                       
-                        LinkedList<Move> other = new LinkedList<>();
-                        other.add(new Simple(last, position.getNextMove(dir), board));
-                        moves.add(new Multiple(position.clone(), to, board, other));
-                       
+                try {
+                    if (free) {
+                        Position last = next.getNextMove(dir);
+                        Piece rook = board.getPieceList().getByPosition(last);
+                        if (!rook.moved && rook.side == side) {
+                            Position to = position.getNextMove(dir).getNextMove(dir);
+                            LinkedList<Move> other = new LinkedList<>();
+                            other.add(new Simple(last, position.getNextMove(dir), board));
+                            moves.add(new Multiple(position.clone(), to, board, other));
+
+                        }
                     }
-                }}catch(LogicException ex){
-                    if (ex.getCode() != LogicException.NO_PIECE_FOUND){
+                } catch (LogicException ex) {
+                    if (ex.getCode() != LogicException.NO_PIECE_FOUND) {
                         throw ex;
                     }
                 }
@@ -75,11 +86,7 @@ public class King extends Piece {
 
             }
         }
-        
+
         return moves;
     }
-    
-    
-
-
 }

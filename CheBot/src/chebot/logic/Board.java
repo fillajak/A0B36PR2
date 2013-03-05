@@ -16,6 +16,7 @@ import chebot.logic.piece.Queen;
 import chebot.logic.piece.Rook;
 import chebot.logic.enums.Side;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 /**
  * Represents chess board.
@@ -26,11 +27,10 @@ public class Board {
 
     private PieceList pieceList = new PieceList();
     public LinkedList<Move> history = new LinkedList<>();
-    
-    
 
     /**
      * Contains all pieces.
+     *
      * @return all pieces in PieceList
      */
     public PieceList getPieceList() {
@@ -41,31 +41,35 @@ public class Board {
     public String toString() {
         return pieceList.toString();
     }
-    public void clear(){
+
+    public void clear() {
         pieceList.getLinkedList().clear();
         history.clear();
     }
 
-
-    public String move(Position from, Position to){
-        String s = (history.size()+1)+". "+pieceList.getByPosition(from).getMoves().executeMove(from, to);
+    public String move(Position from, Position to) {
+        String s = (history.size() + 1) + ". " + pieceList.getByPosition(from).getMoves().executeMove(from, to);
         return s;
-        
+
     }
-    public String undoLast(){
+
+    public String undoLast() {
         Move m = history.getLast();
-        return "undo: "+ m.reverse(true);
+        return "undo: " + m.reverse(true);
+
     }
-    public Piece getPiece(Position position){
+
+    public Piece getPiece(Position position) {
         return pieceList.getByPosition(position);
     }
-    
-/**
- * Adds piece to board.
- * @param figure type of piece PAWN, ROOK ...
- * @param side side WHITE or BLACK
- * @param position position on board
- */
+
+    /**
+     * Adds piece to board.
+     *
+     * @param figure type of piece PAWN, ROOK ...
+     * @param side side WHITE or BLACK
+     * @param position position on board
+     */
     public void addPiece(Figure figure, Side side, Position position) {
         Piece piece = null;
         switch (figure) {
@@ -74,7 +78,7 @@ public class Board {
                 break;
             }
             case BISHOP: {
-                piece =new Bishop(side, position, this);
+                piece = new Bishop(side, position, this);
                 break;
             }
             case KNIGHT: {

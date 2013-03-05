@@ -56,7 +56,7 @@ public class MoveList {
 
     public void add(Move move) {
         try {
-            move.execute(true);
+            move.execute(true);       
             move.reverse(true);
             moves.add(move);
         } catch (LogicException ex) {

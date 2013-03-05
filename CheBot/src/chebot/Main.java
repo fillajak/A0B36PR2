@@ -4,15 +4,9 @@
  */
 package chebot;
 
-import chebot.logic.Board;
 import chebot.logic.Game;
-import chebot.logic.piece.Pawn;
-import chebot.logic.piece.Piece;
-import chebot.logic.piece.Queen;
-import chebot.logic.piece.Rook;
-import chebot.logic.Position;
-import chebot.logic.enums.Figure;
-import chebot.logic.enums.Side;
+import chebot.logic.move.Move;
+import chebot.logic.move.Simple;
 
 /**
  *

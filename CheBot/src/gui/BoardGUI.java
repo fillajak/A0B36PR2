@@ -42,7 +42,7 @@ public class BoardGUI extends JFrame {
     private Game game;
     private JPanel game_panel, mainPanel;
     private JMenuBar menuBar;
-    private JMenuItem exit, newGame, undo, showMove, status;
+    public JMenuItem exit, newGame, undo, showMove, status;
     private JMenu gameMenu, editMenu, testMenu;
     private JTextArea history;
     private JScrollPane historyPane;

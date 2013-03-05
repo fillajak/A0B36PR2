@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.NoSuchElementException;
 import javax.swing.JMenuItem;
 
 /**
@@ -60,7 +61,12 @@ public class Game implements ActionListener, MouseListener {
              //   gui.paintAllSelected(board.getPieceList().getAllMoves(Side.BLACK), Selection.RED);
             }
             if ("Undo".equals(m.getActionCommand())) {
-                gui.setHistoryWrap(board.undoLast());
+               try{
+                   gui.setHistoryWrap(board.undoLast());
+               }
+               catch(NoSuchElementException ex){
+                  // gui.undo.setEnabled(false);
+               }
                 
                 setPiece = false;
                 gui.paintField();
