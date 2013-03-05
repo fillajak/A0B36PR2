@@ -23,6 +23,9 @@ import java.util.LinkedList;
  * @author Dick
  */
 public class King extends Piece {
+    
+    private final Position START_BLACK = new Position(Position.E, 8);
+    private final Position START_WHITE = new Position(Position.E, 1);
 
     public King(Side side, Position position, Board board) {
         super(side, position, board);
@@ -42,10 +45,17 @@ public class King extends Piece {
 
         DigVec dir = new DigVec(Direction.RIGHT);
         boolean free;
+        Position start;
         LinkedList<Integer> l = new LinkedList<>();
         l.add(2);
         l.add(3);
-        if (!this.moved && !board.getPieceList().hasCheck(side)) {
+        if (side == Side.BLACK){
+            start = START_BLACK;
+        }
+        else{
+            start = START_WHITE; 
+       }
+        if (!this.moved && !board.getPieceList().hasCheck(side) && position.equals(start)) {
             for (Integer it : l) {
                 Position next = position;
                 free = true;
