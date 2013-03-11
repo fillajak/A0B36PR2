@@ -5,7 +5,7 @@
 package chebot.logic;
 
 /**
- *
+ *Represents status of game. NORMAL-CHECK-CHECK_MATE-TIE
  * @author Dick
  */
 public enum Status { 

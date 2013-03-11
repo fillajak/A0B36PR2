@@ -5,7 +5,7 @@
 package chebot.logic.enums;
 
 /**
- *
+ *Represents direction.
  * @author Dick
  */
 public enum Direction {

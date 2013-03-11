@@ -4,12 +4,14 @@
  */
 package chebot.logic;
 
-import chebot.logic.*;
-
-/**
- *
- * @author Dick
- */
+    /**
+     * Represents positions on cheessboard within range [A1] to [H8]. Bottom left corner is [A1]
+     *
+     * exaple of contructor: Position [A3] -- Position(A, 3) or(1,3) or (1, C)
+     *
+     * @param row row A-H
+     * @param line line 1-8
+     */
 public class Position {
 
     /**
@@ -18,15 +20,12 @@ public class Position {
     public static final int A = 1, B = 2, C = 3, D = 4, E = 5, F = 6, G = 7, H = 8, MIN = 1, MAX = 8;
     private int row, line; // row A-H, line 1-8
 
-    /**
-     * Represents positions on cheessboard within range [A1] to [H8]. Bottom left corner is [A1]
-     *
-     * exaple of contructor: Position [A3] -- Position(A, 3) or(1,3) or (1, C)
-     *
-     * @throws LogicException - out of field
-     * @param row row A-H
-     * @param line line 1-8
-     */
+/**
+ * Creates position.
+ * @param row row A-H
+ * @param line line 1-8
+ * @throws LogicException - out of field
+ */
     public Position(int row, int line) {
         checkPosition(row, line);
         this.row = row;

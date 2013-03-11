@@ -20,7 +20,7 @@ import chebot.logic.move.Simple;
 import java.util.LinkedList;
 
 /**
- *
+ *Represents pawn.
  * @author Dick
  */
 public class Pawn extends Piece {

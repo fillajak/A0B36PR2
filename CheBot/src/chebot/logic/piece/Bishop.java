@@ -12,11 +12,11 @@ import chebot.logic.enums.Side;
 import chebot.logic.Board;
 
 /**
- *
+ *Represents bishop.
  * @author Dick
  */
 public class Bishop extends Piece{
-
+    
     public Bishop(Side side, Position position, Board board) {
         super(side, position, board);
         simpleMoves.add(new DigVec(Direction.UP_LEFT));

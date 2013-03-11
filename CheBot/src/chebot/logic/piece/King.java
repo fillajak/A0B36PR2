@@ -19,11 +19,11 @@ import chebot.logic.move.Simple;
 import java.util.LinkedList;
 
 /**
- *
+ *Represents king.
  * @author Dick
  */
 public class King extends Piece {
-    
+
     private final Position START_BLACK = new Position(Position.E, 8);
     private final Position START_WHITE = new Position(Position.E, 1);
 
@@ -33,14 +33,16 @@ public class King extends Piece {
             simpleMoves.add(new DigVec(dir, Type.JUMP));
         }
     }
-
     @Override
     public PositionList getPositionsToMoveUnchecked() {
         return go();
     }
-
+/**
+ * Check if castle is possible, if true creates associated move.
+ * @return moves
+ */
     @Override
-    public MoveList getMoves() {
+    public MoveList getMoves() { 
         MoveList moves = super.getMoves();
 
         DigVec dir = new DigVec(Direction.RIGHT);
@@ -49,12 +51,11 @@ public class King extends Piece {
         LinkedList<Integer> l = new LinkedList<>();
         l.add(2);
         l.add(3);
-        if (side == Side.BLACK){
+        if (side == Side.BLACK) {
             start = START_BLACK;
+        } else {
+            start = START_WHITE;
         }
-        else{
-            start = START_WHITE; 
-       }
         if (!this.moved && !board.getPieceList().hasCheck(side) && position.equals(start)) {
             for (Integer it : l) {
                 Position next = position;
@@ -62,13 +63,16 @@ public class King extends Piece {
                 for (int i = 0; i < it; i++) {
                     try {
                         next = next.getNextMove(dir);
+                        if (board.getPieceList().getPositionsToCheck(side.getOponent()).conntains(next)) {
+                            free = false;
+                            break;
+                        }
                     } catch (LogicException ex) {
                         if (ex.getCode() != LogicException.OUT_OF_FIELD_CODE) {
                             throw ex;
-                        }
-                        else{
+                        } else {
                             free = false;
-                            break;      
+                            break;
                         }
                     }
                     if (!board.getPieceList().isFree(next)) {

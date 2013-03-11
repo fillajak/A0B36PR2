@@ -28,6 +28,7 @@ public abstract class Piece {
     protected LinkedList<DigVec> simpleMoves = new LinkedList<>();
     protected boolean moved;
     protected LinkedList<Position> history = new LinkedList<>();
+    protected int value;
 
     public Piece(Side side, Position position, Board board) {
         this.side = side;

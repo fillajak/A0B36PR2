@@ -9,7 +9,7 @@ import chebot.logic.Position;
 import chebot.logic.piece.Piece;
 
 /**
- *
+ *Represents special move, when piece kick out piece, which is not on position on which selected piece go.
  * @author Dick
  */
 public class EnPass extends Move{

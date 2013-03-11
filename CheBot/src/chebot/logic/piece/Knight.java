@@ -12,7 +12,7 @@ import chebot.logic.enums.Type;
 import chebot.logic.Board;
 
 /**
- *
+ *Represents knight.
  * @author Dick
  */
 public class Knight extends Piece {

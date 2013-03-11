@@ -13,7 +13,7 @@ import chebot.logic.enums.Direction;
 import chebot.logic.enums.Figure;
 
 /**
- *
+ *Represents queen.
  * @author Dick
  */
 public class Queen extends Piece{

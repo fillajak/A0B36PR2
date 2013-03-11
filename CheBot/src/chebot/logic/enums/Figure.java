@@ -5,7 +5,7 @@
 package chebot.logic.enums;
 
 /**
- *
+ *Represents type of piece. 
  * @author Dick
  */
 public enum Figure { 

@@ -12,7 +12,7 @@ import chebot.logic.enums.Side;
 import java.util.LinkedList;
 
 /**
- *
+ *Represents list of pieces.
  * @author Dick
  */
 public class PieceList {

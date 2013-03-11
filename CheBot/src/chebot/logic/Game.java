@@ -19,7 +19,7 @@ import java.util.NoSuchElementException;
 import javax.swing.JMenuItem;
 
 /**
- *
+ *Represents game, move with pieces. Implements action and mouse listeners.
  * @author Dick
  */
 public class Game implements ActionListener, MouseListener {
