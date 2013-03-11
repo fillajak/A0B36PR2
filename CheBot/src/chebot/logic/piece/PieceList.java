@@ -9,6 +9,7 @@ import chebot.logic.Position;
 import chebot.logic.PositionList;
 import chebot.logic.Status;
 import chebot.logic.enums.Side;
+import chebot.logic.move.MoveList;
 import java.util.LinkedList;
 
 /**
@@ -127,7 +128,7 @@ public class PieceList {
      * @param side side that moves
      * @return all moves
      */
-    public PositionList getAllMoves(Side side){
+    public PositionList getAllPositionToMove(Side side){
         PositionList ret = new PositionList();
         for (Piece p: this.list){
             if (p.side == side){
@@ -136,6 +137,17 @@ public class PieceList {
         }
         return ret;
     }
+    public MoveList getAllMoves(Side side){
+        MoveList moves = new MoveList();
+        
+        for (Piece p: this.list){
+            if (p.side == side){
+                moves.addAll(new MoveList(p));
+            }
+        }
+        return moves;
+        
+    }
     /**
      * Returns status of field.
      * @param side supervised side
@@ -143,7 +155,7 @@ public class PieceList {
      */
     public Status getStatus(Side side){
         if (!hasCheck(side)){
-            if (getAllMoves(side).getList().isEmpty()){
+            if (getAllPositionToMove(side).getList().isEmpty()){
                 return Status.TIE;
             }
             else{
@@ -152,7 +164,7 @@ public class PieceList {
             
         }
         else{
-            if (getAllMoves(side).getList().isEmpty()){
+            if (getAllPositionToMove(side).getList().isEmpty()){
                 return Status.CHECK_MATE;
             }
             else{

@@ -23,6 +23,7 @@ public class Queen extends Piece{
         for (Direction dir: Direction.values()){
             simpleMoves.add(new DigVec(dir));
         }
+        value = 900;
     }
 
     @Override

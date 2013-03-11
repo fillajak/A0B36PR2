@@ -31,6 +31,7 @@ public class Knight extends Piece {
         simpleMoves.add(new DigVec(1, 2, Type.JUMP));
         simpleMoves.add(new DigVec(-1, 2, Type.JUMP));
 
+        value = 300;
 
     }
 

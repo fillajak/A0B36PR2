@@ -4,9 +4,7 @@
  */
 package chebot.logic;
 
-import chebot.logic.piece.Bishop;
 import chebot.logic.enums.Figure;
-import chebot.logic.piece.King;
 import chebot.logic.piece.Knight;
 import chebot.logic.move.Move;
 import chebot.logic.piece.Pawn;
@@ -15,8 +13,10 @@ import chebot.logic.piece.PieceList;
 import chebot.logic.piece.Queen;
 import chebot.logic.piece.Rook;
 import chebot.logic.enums.Side;
+import chebot.logic.move.MoveList;
+import chebot.logic.piece.Bishop;
+import chebot.logic.piece.King;
 import java.util.LinkedList;
-import java.util.NoSuchElementException;
 
 /**
  * Represents chess board.
@@ -27,6 +27,7 @@ public class Board {
 
     private PieceList pieceList = new PieceList();
     public LinkedList<Move> history = new LinkedList<>();
+    
 
     /**
      * Contains all pieces.
@@ -42,7 +43,7 @@ public class Board {
         return pieceList.toString();
     }
 
-    public void clear() {
+    public final void clear() {
         pieceList.getLinkedList().clear();
         history.clear();
     }
@@ -101,4 +102,27 @@ public class Board {
         }
         pieceList.addPiece(piece);
     }
+
+    /**
+     * Statistatical evaluating function.
+     *
+     * @param side evaluated side
+     * @return value of board
+     */
+    public int evaluateBoard(Side side) { //jenom figurky
+        int ret = 0;
+    
+        for (Piece p : pieceList.getLinkedList()) {
+            if (p.getSide() == side) {
+                ret += p.getValue();
+                
+            }
+            else{
+                ret-= p.getValue();
+                
+            }
+        }
+        return ret;
+    }
+    
 }

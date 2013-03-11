@@ -23,6 +23,7 @@ public class Bishop extends Piece{
         simpleMoves.add(new DigVec(Direction.UP_RIGHT));
         simpleMoves.add(new DigVec(Direction.DOWN_LEFT));
         simpleMoves.add(new DigVec(Direction.DOWN_RIGHT));
+        value = 300;
     }
 
     @Override

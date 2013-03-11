@@ -23,6 +23,7 @@ public class Rook extends Piece{
         simpleMoves.add(new DigVec(Direction.DOWN));
         simpleMoves.add(new DigVec(Direction.LEFT));
         simpleMoves.add(new DigVec(Direction.RIGHT)); 
+        value = 500;
     }
 
     @Override

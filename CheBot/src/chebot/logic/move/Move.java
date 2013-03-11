@@ -10,12 +10,14 @@ import chebot.logic.Position;
 import chebot.logic.piece.Piece;
 
 /**
- *Represents move from position1 to position2. Has special offspring. Contains method execute() and reverse(),
- * which can be called in pairs. Like this: exec - rev - exec - rev
+ * Represents move from position1 to position2. Has special offspring. Contains
+ * method execute() and reverse(), which can be called in pairs. Like this: exec
+ * - rev - exec - rev
+ *
  * @author Dick
  */
 public abstract class Move {
-    
+
     protected Position from;
     protected Position to;
     protected Piece out;
@@ -23,8 +25,7 @@ public abstract class Move {
     protected Board board;
     protected String info;
     private boolean executed;
-   
-    
+
     public Move(Position from, Position to, Board board) {
         this.from = from.clone();
         this.to = to.clone();
@@ -35,8 +36,8 @@ public abstract class Move {
             info += board.getPiece(to).getTag();
         }
         executed = false;
-        
-        
+
+
     }
 
     public Position getFrom() {
@@ -46,23 +47,26 @@ public abstract class Move {
     public Position getTo() {
         return to;
     }
-    
-    
+
     /**
-     * Executes move. Can be executed only once. Whem method reverse() is called, can be executed again. 
+     * Executes move. Can be executed only once. Whem method reverse() is
+     * called, can be executed again.
+     *
      * @param save save to history - true
-     * @return  move report like this: PW[A2] to [B3]BR, white pawn from A2 takes black pawn on B3
-     * @throws MoveException when called twice in row, without calling reverse();
+     * @return move report like this: PW[A2] to [B3]BR, white pawn from A2 takes
+     * black pawn on B3
+     * @throws MoveException when called twice in row, without calling
+     * reverse();
      */
-    protected String execute(boolean save) {     
-        if (!(this instanceof Simple)){
-           // throw  new MoveException("special move", MoveException.SPECIAL);
+    protected String execute(boolean save) {
+        if (!(this instanceof Simple)) {
+            // throw  new MoveException("special move", MoveException.SPECIAL);
         }
-        if (executed){
+        if (executed) {
             throw new MoveException("move already executed", MoveException.CANT_EXECUTE);
         }
         Piece p = board.getPieceList().getByPosition(from);
-        
+
         try {
             out = board.getPieceList().getByPosition(to);
         } catch (LogicException ex) {
@@ -78,18 +82,21 @@ public abstract class Move {
             if (out != null) {
                 out.setOut(true);
             }
-            
+
         }
-        if (save){
+        if (save) {
             board.history.add(this);
         }
         executed = true;
+        value = board.evaluateBoard(p.getSide());
         return info;
-        
-        
+
+
     }
+
     /**
      * Method to find move. Unique defined by its two positons.
+     *
      * @param from starting position
      * @param to where to go.
      * @return true - same move
@@ -97,14 +104,18 @@ public abstract class Move {
     public boolean isSame(Position from, Position to) {
         return this.from.equals(from) && this.to.equals(to);
     }
+
     /**
-     * Reverts move. Must be executed first. Cant be called twice, without calling execute().
+     * Reverts move. Must be executed first. Cant be called twice, without
+     * calling execute().
+     *
      * @param save true remove move from history
-     * @return move report like this: PW[A2] to [B3]BR, white pawn from A2 takes black pawn on B3
+     * @return move report like this: PW[A2] to [B3]BR, white pawn from A2 takes
+     * black pawn on B3
      * @throws MoveException when move wasnt executed first
      */
     public String reverse(boolean save) {
-        if(!executed){
+        if (!executed) {
             throw new MoveException("cant be reversed, wasnt executed", MoveException.CANT_REVERSE);
         }
         Piece p = board.getPieceList().getByPosition(to);
@@ -112,15 +123,19 @@ public abstract class Move {
         if (out != null) {
             out.setOut(false);
         }
-       if (save){
-           board.history.removeLast();
-       }
+        if (save) {
+            board.history.removeLast();
+        }
         executed = false;
         return info;
     }
- 
+
     @Override
     public String toString() {
-        return info;
+        return info+" value: "+value;
+    }
+
+    public int getValue() {
+        return value;
     }
 }

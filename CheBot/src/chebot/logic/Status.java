@@ -9,5 +9,16 @@ package chebot.logic;
  * @author Dick
  */
 public enum Status { 
-    NORMAL, CHECK, CHECK_MATE, TIE;   
+    NORMAL(0),
+    CHECK(0), CHECK_MATE(100000), TIE(0);   
+    
+    private int value;
+    private Status(int value){
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+    
 }

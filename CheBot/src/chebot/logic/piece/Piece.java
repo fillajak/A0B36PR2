@@ -45,6 +45,16 @@ public abstract class Piece {
     public boolean isOut() {
         return out;
     }
+
+    public int getValue() {
+        if (out){
+            return 0;
+        }
+        else{
+            return value;
+        }
+    }
+    
     public void setOut(boolean out){
         this.out = out;
     }

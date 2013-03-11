@@ -73,8 +73,14 @@ public class Game implements ActionListener, MouseListener {
 
             }
             if ("Status".equals(m.getActionCommand())) {
-                gui.setHistoryWrap(
-                        "status of white? " + board.getPieceList().getStatus(Side.WHITE));
+            /*    gui.setHistoryWrap(
+                        "status of white? " + board.getPieceList().getStatus(Side.WHITE));*/
+                
+                gui.setHistoryWrap("value: "+board.evaluateBoard(Side.WHITE)+"");
+                System.out.println(board.getPieceList().getAllMoves(Side.WHITE));
+             /*   for (Move mov: board.getPieceList().getAllPositionToMove(Side.WHITE)){
+                    
+                }*/
             }
         }
         if (e.getSource() instanceof Adder) {

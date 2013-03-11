@@ -66,6 +66,11 @@ public class MoveList {
         }
 
     }
+    public void addAll(MoveList moveList){
+        for (Move m: moveList.getMoves()){
+            this.add(m);
+        }
+    }
 
     /**
      * Executes move from its list. See execute in Move.

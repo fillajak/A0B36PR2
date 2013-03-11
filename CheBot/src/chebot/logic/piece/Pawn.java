@@ -46,6 +46,7 @@ public class Pawn extends Piece {
                 moved = true;
             }
         }
+        value = 100;
     }
 
     @Override
