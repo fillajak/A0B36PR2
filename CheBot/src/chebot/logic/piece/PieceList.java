@@ -9,11 +9,13 @@ import chebot.logic.Position;
 import chebot.logic.PositionList;
 import chebot.logic.Status;
 import chebot.logic.enums.Side;
+import chebot.logic.move.Move;
 import chebot.logic.move.MoveList;
 import java.util.LinkedList;
 
 /**
- *Represents list of pieces.
+ * Represents list of pieces.
+ *
  * @author Dick
  */
 public class PieceList {
@@ -114,66 +116,66 @@ public class PieceList {
         }
         return false;
     }
-   
-    public Piece getKing(Side side){
-        for(Piece p: this.list){
-            if (p instanceof King && p.side == side){
+
+    public Piece getKing(Side side) {
+        for (Piece p : this.list) {
+            if (p instanceof King && p.side == side) {
                 return p;
             }
         }
         throw new LogicException("no king found", -1);
     }
+
     /**
      * Gets all moves by, which van be executed by selected side.
+     *
      * @param side side that moves
      * @return all moves
      */
-    public PositionList getAllPositionToMove(Side side){
+    public PositionList getAllPositionToMove(Side side) {
         PositionList ret = new PositionList();
-        for (Piece p: this.list){
-            if (p.side == side){
+        for (Piece p : this.list) {
+            if (p.side == side) {
                 ret.addAll(p.getMoves().getPositionsToMove(p.position));
             }
         }
         return ret;
     }
-    public MoveList getAllMoves(Side side){
-        MoveList moves = new MoveList();
-        
-        for (Piece p: this.list){
-            if (p.side == side){
-                moves.addAll(new MoveList(p));
+
+    public LinkedList<Move> getAllMoves(Side side) {
+        LinkedList<Move> moves = new LinkedList<>();
+        for (Piece p : list) {
+            if (side == p.side) {
+                moves.addAll(p.getMoves().getMoves());
             }
         }
         return moves;
-        
+
     }
+
     /**
      * Returns status of field.
+     *
      * @param side supervised side
      * @return TIE, CHECK, CHECK_MATE, NORMAL - nothing prev.
      */
-    public Status getStatus(Side side){
-        if (!hasCheck(side)){
-            if (getAllPositionToMove(side).getList().isEmpty()){
+    public Status getStatus(Side side) {
+        if (!hasCheck(side)) {
+            if (getAllPositionToMove(side).getList().isEmpty()) {
                 return Status.TIE;
-            }
-            else{
+            } else {
                 return Status.NORMAL;
             }
-            
-        }
-        else{
-            if (getAllPositionToMove(side).getList().isEmpty()){
+
+        } else {
+            if (getAllPositionToMove(side).getList().isEmpty()) {
                 return Status.CHECK_MATE;
-            }
-            else{
+            } else {
                 return Status.CHECK;
             }
         }
-        
+
     }
-   
 
     public LinkedList<Piece> getLinkedList() {
         return list;

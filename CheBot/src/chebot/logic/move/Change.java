@@ -20,22 +20,27 @@ public class Change extends Move{
 
     public Change(Position from, Position to, Board board, Figure changeTo) {
         super(from, to, board);
-        this.changeTo = changeTo;
+        this.changeTo = changeTo;     
+        this.execute(true);
+        this.reverse(true);
                 
     }
 
     @Override
-    protected String execute(boolean save) {
+    public final String execute(boolean save) {
         Piece p = board.getPieceList().getByPosition(from);
         board.getPieceList().getLinkedList().remove(p);
         Piece changed = new Queen(p.getSide(), from, board);
         changed.setHistory(p.getHistory());
         board.getPieceList().addPiece(changed);
-        return super.execute(true)+" prom.";
+        
+        String s = super.execute(true)+" prom.";
+        
+        return s;
     }
 
     @Override
-    public String reverse(boolean save) {
+    public final String reverse(boolean save) {
         Piece p = board.getPieceList().getByPosition(to);
         board.getPieceList().getLinkedList().remove(p);
         Piece changed = new Pawn(p.getSide(), from, board);

@@ -42,7 +42,7 @@ public class BoardGUI extends JFrame {
     private Game game;
     private JPanel game_panel, mainPanel;
     private JMenuBar menuBar;
-    public JMenuItem exit, newGame, undo, showMove, status;
+    public JMenuItem exit, newGame, undo, showMove, status, playWhite, playBlack;
     private JMenu gameMenu, editMenu, testMenu;
     private JTextArea history;
     private JScrollPane historyPane;
@@ -89,6 +89,14 @@ public class BoardGUI extends JFrame {
         
         status = new JMenuItem("Status");
      
+        playBlack = new JMenuItem("playBlack");
+        playBlack.addActionListener(game);
+        testMenu.add(playBlack);
+        
+        playWhite = new JMenuItem("playWhite");
+        playWhite.addActionListener(game);
+        testMenu.add(playWhite);
+        
         status.addActionListener(game);
         testMenu.add(status);
         

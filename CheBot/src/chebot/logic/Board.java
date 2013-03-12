@@ -111,18 +111,96 @@ public class Board {
      */
     public int evaluateBoard(Side side) { //jenom figurky
         int ret = 0;
-    
+        if (pieceList.getStatus(side.getOponent())== Status.CHECK_MATE){
+            return Status.CHECK_MATE.getValue();
+        }  
         for (Piece p : pieceList.getLinkedList()) {
             if (p.getSide() == side) {
                 ret += p.getValue();
                 
             }
             else{
-                ret-= p.getValue();
-                
+                ret -= p.getValue();
             }
         }
         return ret;
     }
+    public String playRandom(Side side){
+        LinkedList<Move> moves =pieceList.getAllMoves(side);
+        int rnd = (int)(Math.random()*100000)%moves.size();
+        return moves.get(rnd).execute(true);  
+    }
     
-}
+    public Move getBestMove(Side side){
+        LinkedList<Move> moves =pieceList.getAllMoves(side);
+        int price, best = Integer.MIN_VALUE;
+        Move bestMove = moves.getFirst();
+        for (Move move: moves){
+            move.execute(true);
+            price = this.evaluateBoard(side);
+            System.out.println(price);
+            move.reverse(false);
+            if (price >best){
+                best = price;
+                bestMove = move;
+            }
+        }
+        return bestMove;
+    }
+    public String playBestMove(Side side){
+        return getBestMove(side).execute(true);
+    }
+    public int minimax(int depth, Side side){
+        LinkedList<Move> moves;
+        
+        
+        if (pieceList.getStatus(side)== Status.CHECK_MATE){
+            return -Status.CHECK_MATE.getValue();
+        }
+        if (pieceList.getStatus(side)== Status.TIE){
+            return 0;
+        }
+        if (depth<=0){
+            return evaluateBoard(side);
+        }
+        
+        moves = pieceList.getAllMoves(side);
+        
+        int best = Integer.MIN_VALUE;
+        int price = best;
+        for (Move move: moves){
+            move.execute(true);
+            price = minimax(depth-1, side);
+            move.reverse(true);
+        }
+        if (price>best){
+            best = price;
+            
+        }
+
+        return best;
+    }
+        public Move getBestMove(Side side, int depth){
+        LinkedList<Move> moves =pieceList.getAllMoves(side);
+        int price, best = Integer.MIN_VALUE;
+        Move bestMove = moves.getFirst();
+        for (Move move: moves){
+            move.execute(true);
+            price = minimax(depth, side);
+            System.out.println(price);
+            move.reverse(false);
+            if (price >best){
+                best = price;
+                bestMove = move;
+            }
+        }
+        return bestMove;
+    }
+        public String playBestMove(Side side, int depth){
+            return getBestMove(side, depth).execute(true);
+        }
+    }
+
+    
+    
+

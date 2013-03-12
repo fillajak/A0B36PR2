@@ -21,7 +21,6 @@ public abstract class Move {
     protected Position from;
     protected Position to;
     protected Piece out;
-    protected int value;
     protected Board board;
     protected String info;
     private boolean executed;
@@ -58,7 +57,7 @@ public abstract class Move {
      * @throws MoveException when called twice in row, without calling
      * reverse();
      */
-    protected String execute(boolean save) {
+    public String execute(boolean save) {
         if (!(this instanceof Simple)) {
             // throw  new MoveException("special move", MoveException.SPECIAL);
         }
@@ -88,10 +87,7 @@ public abstract class Move {
             board.history.add(this);
         }
         executed = true;
-        value = board.evaluateBoard(p.getSide());
         return info;
-
-
     }
 
     /**
@@ -132,10 +128,8 @@ public abstract class Move {
 
     @Override
     public String toString() {
-        return info+" value: "+value;
+        return info;
     }
 
-    public int getValue() {
-        return value;
-    }
+ 
 }

@@ -18,17 +18,19 @@ public class EnPass extends Move{
     public EnPass(Position from, Position to, Board board, Piece out2) {
         super(from, to, board);
         this.out2 = out2;
+        this.execute(true);
+        this.reverse(true);
     }
 
     @Override
-    protected String execute(boolean save) {
+    public final String execute(boolean save) {
        String s  = super.execute(save);
        out2.setOut(true);
        return s+"e.p.";
     }
 
     @Override
-    public String reverse(boolean save) {
+    public final String reverse(boolean save) {
         String s =  super.reverse(save);
         out2.setOut(false);
         return s+"e.p.";

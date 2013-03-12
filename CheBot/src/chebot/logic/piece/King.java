@@ -29,6 +29,7 @@ public class King extends Piece {
 
     public King(Side side, Position position, Board board) {
         super(side, position, board);
+        value = 0;
         for (Direction dir : Direction.values()) {
             simpleMoves.add(new DigVec(dir, Type.JUMP));
         }

@@ -19,7 +19,8 @@ import java.util.NoSuchElementException;
 import javax.swing.JMenuItem;
 
 /**
- *Represents game, move with pieces. Implements action and mouse listeners.
+ * Represents game, move with pieces. Implements action and mouse listeners.
+ *
  * @author Dick
  */
 public class Game implements ActionListener, MouseListener {
@@ -40,8 +41,8 @@ public class Game implements ActionListener, MouseListener {
 
     private void setGame() {
         gui.paintField();
-       
-        
+
+
     }
 
     public void turn(Position pos) {
@@ -58,30 +59,42 @@ public class Game implements ActionListener, MouseListener {
             }
             if ("Exit".equals(m.getActionCommand())) {
                 System.out.println("show possible moves");
-             //   gui.paintAllSelected(board.getPieceList().getAllMoves(Side.BLACK), Selection.RED);
+                //   gui.paintAllSelected(board.getPieceList().getAllMoves(Side.BLACK), Selection.RED);
             }
             if ("Undo".equals(m.getActionCommand())) {
-               try{
-                   gui.setHistoryWrap(board.undoLast());
-               }
-               catch(NoSuchElementException ex){
-                  // gui.undo.setEnabled(false);
-               }
-                
+                try {
+                    gui.setHistoryWrap(board.undoLast());
+                } catch (NoSuchElementException ex) {
+                    // gui.undo.setEnabled(false);
+                }
+
                 setPiece = false;
                 gui.paintField();
 
             }
             if ("Status".equals(m.getActionCommand())) {
-            /*    gui.setHistoryWrap(
-                        "status of white? " + board.getPieceList().getStatus(Side.WHITE));*/
-                
-                gui.setHistoryWrap("value: "+board.evaluateBoard(Side.WHITE)+"");
-                System.out.println(board.getPieceList().getAllMoves(Side.WHITE));
-             /*   for (Move mov: board.getPieceList().getAllPositionToMove(Side.WHITE)){
+              //  System.out.println(board.getBestMove(Side.WHITE));
+              //  gui.paintField();
+                    gui.setHistoryWrap(
+                 "status of black? " + board.getPieceList().getStatus(Side.BLACK));
+
+               // gui.setHistoryWrap("value: " + board.evaluateBoard(Side.WHITE) + "");
+               // System.out.println(board.getPieceList().getAllMoves(Side.WHITE));
+                /*   for (Move mov: board.getPieceList().getAllPositionToMove(Side.WHITE)){
                     
-                }*/
+                 }*/
             }
+            if ("playWhite".equals(m.getActionCommand())) {
+                gui.setHistoryWrap("radnom move from White\n"+board.playBestMove(Side.WHITE,1));
+                
+                gui.paintField();
+            }
+            if ("playBlack".equals(m.getActionCommand())) {
+                gui.setHistoryWrap("radnom move from Black\n "+board.playRandom(Side.BLACK));
+                
+                gui.paintField();
+            }
+
         }
         if (e.getSource() instanceof Adder) {
             Adder a = (Adder) e.getSource();
@@ -111,22 +124,24 @@ public class Game implements ActionListener, MouseListener {
                     PositionList test = board.getPieceList().getByPosition(pos).getMoves().getPositionsToMove(pos);
                     gui.paintAllSelected(test, Selection.RED);
 
+
                     position = pos;
+                    System.out.println(board.getPieceList().getByPosition(position).getMoves());
                     setPiece = true;
                 }
             } else {
-                
-                try{
+
+                try {
                     gui.setHistoryWrap(board.move(position, pos));
-                    
-                }catch(LogicException ex){
-                    if (ex.getCode() != LogicException.CANT_MOVE){
+
+                } catch (LogicException ex) {
+                    if (ex.getCode() != LogicException.CANT_MOVE) {
                         throw ex;
                     }
                 }
                 setPiece = false;
                 gui.paintField();
-                
+
             }
 
         }

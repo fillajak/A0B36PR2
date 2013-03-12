@@ -22,7 +22,7 @@ public class Multiple extends Move {
 
     
     @Override
-    protected String execute(boolean save) {
+    public String execute(boolean save) {
         String ret = super.execute(true);
         for (Move m: others){
             m.execute(false);
